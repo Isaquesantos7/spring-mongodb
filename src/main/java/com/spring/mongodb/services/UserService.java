@@ -4,6 +4,7 @@ import com.spring.mongodb.DTOS.UserDTO;
 import com.spring.mongodb.entities.User;
 import com.spring.mongodb.repositories.UserRepository;
 import com.spring.mongodb.services.exceptions.ObjectNotFoundException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +38,13 @@ public class UserService {
 
         this.userRepository.deleteById(id);
         return user.orElseThrow(() -> new ObjectNotFoundException("Error: Object not found!"));
+    }
+
+    public User update(String id, UserDTO userDTO) {
+        User user = this.userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
+
+        BeanUtils.copyProperties(userDTO, user, "id");
+
+        return this.userRepository.save(user);
     }
 }
