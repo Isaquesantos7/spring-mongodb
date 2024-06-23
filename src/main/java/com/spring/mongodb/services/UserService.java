@@ -23,9 +23,8 @@ public class UserService {
     }
 
     public User findById(String id) {
-       Optional<User> user = this.userRepository.findById(id);
 
-       return user.orElseThrow(() -> new ObjectNotFoundException("Error: Object not found!"));
+       return this.userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Object not found"));
     }
 
     public User saveUser(User user) {
@@ -34,10 +33,10 @@ public class UserService {
     }
 
     public User delete(String id) {
-        Optional<User> user = this.userRepository.findById(id);
+        User user = this.userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
 
         this.userRepository.deleteById(id);
-        return user.orElseThrow(() -> new ObjectNotFoundException("Error: Object not found!"));
+        return user;
     }
 
     public User update(String id, UserDTO userDTO) {

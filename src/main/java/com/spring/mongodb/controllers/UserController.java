@@ -4,7 +4,6 @@ import com.spring.mongodb.DTOS.UserDTO;
 import com.spring.mongodb.entities.User;
 import com.spring.mongodb.services.UserService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,7 +45,7 @@ public class UserController {
     public ResponseEntity<Object> deleteById(@PathVariable(value = "id") String id) {
         User user = this.userService.delete(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body("{\"message:\" \"User\""  + user.getName() +  "\"was deleted with success!\"}");
+        return ResponseEntity.status(HttpStatus.OK).body("{\"message:\" \"User \""  + user.getName() +  "\"was deleted with success!\"}");
     }
 
     @PutMapping("/api/users/{id}")
