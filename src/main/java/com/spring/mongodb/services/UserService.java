@@ -31,4 +31,11 @@ public class UserService {
 
         return this.userRepository.save(user);
     }
+
+    public User delete(String id) {
+        Optional<User> user = this.userRepository.findById(id);
+
+        this.userRepository.deleteById(id);
+        return user.orElseThrow(() -> new ObjectNotFoundException("Error: Object not found!"));
+    }
 }
