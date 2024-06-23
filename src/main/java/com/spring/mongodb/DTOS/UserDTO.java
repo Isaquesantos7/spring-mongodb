@@ -1,6 +1,6 @@
 package com.spring.mongodb.DTOS;
 
-import com.mongodb.lang.NonNull;
+import jakarta.validation.constraints.NotNull;
 
-public record UserDTO(@NonNull String name, @NonNull String email) {
+public record UserDTO(@NotNull String name, @NotNull String email) {
 }

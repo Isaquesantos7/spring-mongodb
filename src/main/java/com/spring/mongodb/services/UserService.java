@@ -1,5 +1,6 @@
 package com.spring.mongodb.services;
 
+import com.spring.mongodb.DTOS.UserDTO;
 import com.spring.mongodb.entities.User;
 import com.spring.mongodb.repositories.UserRepository;
 import com.spring.mongodb.services.exceptions.ObjectNotFoundException;
@@ -26,4 +27,8 @@ public class UserService {
        return user.orElseThrow(() -> new ObjectNotFoundException("Error: Object not found!"));
     }
 
+    public User saveUser(User user) {
+
+        return this.userRepository.save(user);
+    }
 }
