@@ -45,7 +45,7 @@ public class UserController {
     public ResponseEntity<Object> deleteById(@PathVariable(value = "id") String id) {
         User user = this.userService.delete(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body("{\"message:\" \"User \""  + user.getName() +  "\"was deleted with success!\"}");
+        return ResponseEntity.status(HttpStatus.OK).body("{\"message:\" \"User \""  + user.getName() +  "\" was deleted with success!\"}");
     }
 
     @PutMapping("/api/users/{id}")
