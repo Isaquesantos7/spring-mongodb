@@ -1,41 +1,38 @@
 package com.spring.mongodb.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
-@Document(collection = "posts")
-public class Post implements Serializable {
+public class Comment implements Serializable {
     @Serial
-    private final  static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-    @Id
     private String id;
+    private String text;
     private Date date;
-    private String title;
-    private String body;
 
-    @JsonIgnore
     private User author;
 
-    @JsonIgnore
-    private List<Comment> commentList = new ArrayList<>();
+    public Comment() {}
 
-    public Post() {}
-
-    public Post(String id, Date date, String title, String body, User author) {
+    public Comment(String id, String text, Date date, User author) {
         this.id = id;
+        this.text = text;
         this.date = date;
-        this.title = title;
-        this.body = body;
         this.author = author;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getId() {
@@ -54,22 +51,6 @@ public class Post implements Serializable {
         this.date = date;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
     public User getAuthor() {
         return author;
     }
@@ -78,20 +59,12 @@ public class Post implements Serializable {
         this.author = author;
     }
 
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Post post = (Post) o;
-        return Objects.equals(id, post.id);
+        Comment comment = (Comment) o;
+        return Objects.equals(id, comment.id);
     }
 
     @Override
@@ -101,11 +74,11 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "Post{" +
+        return "Comment{" +
                 "id='" + id + '\'' +
+                ", text='" + text + '\'' +
                 ", date=" + date +
-                ", title='" + title + '\'' +
-                ", body='" + body + '\'' +
+                ", author=" + author +
                 '}';
     }
 }
