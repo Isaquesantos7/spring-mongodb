@@ -1,6 +1,7 @@
 package com.spring.mongodb.controllers;
 
 import com.spring.mongodb.DTOS.UserDTO;
+import com.spring.mongodb.entities.Post;
 import com.spring.mongodb.entities.User;
 import com.spring.mongodb.services.UserService;
 import jakarta.validation.Valid;
@@ -31,6 +32,13 @@ public class UserController {
         User user = this.userService.findById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+
+    @GetMapping("/api/users/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable(value = "id") String id) {
+        User user = this.userService.findById(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user.getPosts());
     }
 
     @PostMapping("/api/users")
